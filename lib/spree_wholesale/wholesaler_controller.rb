@@ -56,6 +56,7 @@ module SpreeWholesale
       
       def create
         if validate_wholesaler_parts && @wholesaler.valid? && @wholesaler.save
+          WholesaleMailer.new_wholesaler_email().deliver
           return after_wholesaler_create
         else
           return after_wholesaler_failed_create
